@@ -1,5 +1,8 @@
 ## 这是什么？
 
+[日本語](https://github.com/hosxes/pagemenu-swiftui/blob/master/README.ja.md)
+[English](https://github.com/hosxes/pagemenu-swiftui/blob/master/README.en.md)
+
 一个简单的SwiftUI左右滑动分页组件
 
 ![2](https://user-images.githubusercontent.com/61188273/76767034-49fced00-67dc-11ea-965c-23bcad651e93.gif)
