@@ -93,7 +93,8 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                     .animation(.easeInOut)
                     .highPriorityGesture(DragGesture()
                     .onChanged({ value in
-                        self.offset = abs(value.translation.height) > 5 ? self.offset : (value.translation.width - geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -(geometry.size.width * 1.191), max: geometry.size.width * 1.191)
+                        // 计算角度
+                        self.offset = (abs(value.translation.height) <= 50  && abs(value.translation.width) <= 50) && (atan(value.translation.height/value.translation.width) * 57.3 <= 70 && atan(abs(value.translation.height/value.translation.width)) * 57.3 >= 30) ? self.offset : (value.translation.width - geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -(geometry.size.width * 1.191), max: geometry.size.width * 1.191)
                     })
                         .onEnded({ value in
                             if abs(value.predictedEndTranslation.width) >= geometry.size.width / 50 {
