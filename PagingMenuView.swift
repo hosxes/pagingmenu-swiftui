@@ -79,7 +79,7 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                 }
                 ZStack {
                     Color(red: 246/255, green: 246/255, blue:246/255)
-                    ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
                         HStack(alignment: .center, spacing: 0) {
                             ForEach(self.pages) { page in
                                 page
@@ -88,12 +88,12 @@ struct ScrollPaging<Content: View & Identifiable>: View {
                         }
                         .offset(x: -geometry.size.width)
                     }
-                    .content.offset(x: self.offset)
+                    .offset(x: self.offset)
                     .frame(width: geometry.size.width, height: nil, alignment: .leading)
                     .animation(.easeInOut)
-                    .gesture(DragGesture()
+                    .highPriorityGesture(DragGesture()
                     .onChanged({ value in
-                        self.offset = (value.translation.width - geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -(geometry.size.width * 1.191), max: geometry.size.width * 1.191)
+                        self.offset = abs(value.translation.height) > 5 ? self.offset : (value.translation.width - geometry.size.width * CGFloat(self.index)).keepIndexInRange(min: -(geometry.size.width * 1.191), max: geometry.size.width * 1.191)
                     })
                         .onEnded({ value in
                             if abs(value.predictedEndTranslation.width) >= geometry.size.width / 50 {
